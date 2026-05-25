@@ -1,5 +1,3 @@
-# Agent workspace starter
-
 ## What this workspace is
 
 Use this project when you want **serious agentic work** without spending days wiring rules, prompts, and project structure yourself. You get guardrails so the agent does not wander, a **written record** across chats, and **housekeeping** so the repo does not fill with half-finished edits. Setup is once per machine; you still decide what to build and what to ask. **Cursor** is the primary surface—see **Other agent tools** below for everything else. Copy `.cursor/` into another repo (**embed** mode) to reuse the same harness there.
