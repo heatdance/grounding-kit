@@ -1,0 +1,60 @@
+{
+  "v": 1,
+  "anchors": {
+    "workspace": {
+      "tier": "L1",
+      "path": "l1/workspace.json",
+      "summary": "Agent workspace purpose, modes, and doc harness overview"
+    },
+    "structure": {
+      "tier": "L2",
+      "path": "l2/structure.json",
+      "summary": "Folder allowlist, kebab-case JSON naming, anti-spam rules"
+    },
+    "runtimes": {
+      "tier": "L1",
+      "path": "l1/runtimes.json",
+      "summary": ".agents bridge, runtime detection, non-Cursor onboarding adaptation"
+    },
+    "intent": {
+      "tier": "L1",
+      "path": "l1/intent.json",
+      "summary": "Intent gate, confidence, clarify layout, whack-a-mole, research trail audit"
+    },
+    "operator-assist": {
+      "tier": "L1",
+      "path": "l1/operator-assist.json",
+      "summary": "/better-prompt and /better-skill coaches; read-only subagent delegation"
+    },
+    "preservation": {
+      "tier": "L1",
+      "path": "l1/preservation.json",
+      "summary": "Shipped harness core immutable unless operator entrusts behavior change"
+    },
+    "better-prompt-golden": {
+      "tier": "L2",
+      "path": "l2/better-prompt-golden.json",
+      "summary": "Maintainer regression pack for /better-prompt coach contract"
+    },
+    "skill-authoring-patterns": {
+      "tier": "L2",
+      "path": "l2/skill-authoring-patterns.json",
+      "summary": "Static rubric patterns for /better-skill coach"
+    },
+    "better-skill-golden": {
+      "tier": "L2",
+      "path": "l2/better-skill-golden.json",
+      "summary": "Maintainer regression pack for /better-skill coach contract"
+    },
+    "karpathy-guidelines": {
+      "tier": "L2",
+      "path": "l2/karpathy-guidelines.json",
+      "summary": "Opt-in Karpathy coding guidelines for application/test code"
+    },
+    "distribution-baseline": {
+      "tier": "L2",
+      "path": "l2/distribution-baseline.json",
+      "summary": "Release telemetry baselines and reset procedure for maintainers"
+    }
+  }
+}

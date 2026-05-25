@@ -1,0 +1,34 @@
+{
+  "v": 1,
+  "id": "preservation",
+  "title": "Harness preservation",
+  "purpose": "Keep distributed clones self-reliant: shipped agent behavior stays stable unless the operator explicitly entrusts a change.",
+  "rule": ".cursor/rules/preservation.mdc",
+  "shippedCore": [
+    "rules: communication, structure, documentation, hygiene, intent, delegation, preservation",
+    "hooks: hooks.json + hooks/*.ps1 only",
+    "inject: inject-snapshot.json, docClose, l0 loadPolicy",
+    "manifest.json canonical lists",
+    "commands: onboarding, better-prompt, better-skill behavior",
+    "operator-assist betterPrompt.version and betterSkill.version coach contracts"
+  ],
+  "entrustPhrases": [
+    "change harness behavior",
+    "modify always-on rule",
+    "weaken intent gate",
+    "add auto-learning to better-prompt",
+    "add auto-learning to better-skill",
+    "remove preservation check",
+    "implement preservation exception"
+  ],
+  "vagueRequestPolicy": "Do not edit shipped core; clarify product change vs one-off task or coach in chat",
+  "localTelemetry": {
+    "recommendedPath": ".cursor/docs/local/",
+    "gitPolicy": "gitignore if added; never commit operator drafts to shared corpus"
+  },
+  "related": {
+    "operatorAssist": ".cursor/docs/l1/operator-assist.json",
+    "intent": ".cursor/docs/l1/intent.json",
+    "verifyHarness": ".cursor/scripts/verify-harness.ps1"
+  }
+}

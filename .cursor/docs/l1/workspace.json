@@ -1,0 +1,58 @@
+{
+  "v": 1,
+  "id": "workspace",
+  "title": "Agent workspace starter",
+  "purpose": "Clone-and-go Cursor workspace for agentic work; built for distribution and self-preservation without ongoing owner governance.",
+  "modes": {
+    "workspace": "Open this repo; write only under .cursor/ except README.md when requested.",
+    "embed": "Copy .cursor/ into another repo; same allowlist applies there."
+  },
+  "onboarding": {
+    "slashCommand": ".cursor/commands/onboarding.md",
+    "scriptWindows": ".cursor/scripts/onboard.ps1",
+    "scriptUnix": ".cursor/scripts/unix/onboard.sh",
+    "verifyHarness": ".cursor/scripts/verify-harness.ps1",
+    "manifest": ".cursor/docs/manifest.json",
+    "agentsBridge": ".agents/manifest.yaml",
+    "portableEntry": ".agents/agents.md",
+    "runtimeOverride": "AGENT_RUNTIME",
+    "status": ".cursor/docs/onboarding-status.json",
+    "when": "Once after clone per machine; re-run if jq installed later or hooks break"
+  },
+  "docHarness": {
+    "entry": "AGENTS.md",
+    "tiers": ["l0.json", "l1/*.json", "l2/*.json"],
+    "log": ".cursor/docs/log.json",
+    "current": ".cursor/docs/current.json",
+    "inject": ".cursor/docs/inject-snapshot.json"
+  },
+  "communication": {
+    "rule": ".cursor/rules/communication.mdc",
+    "skill": ".cursor/skills/agent-communication/",
+    "humanSurfaces": ["README.md", ".cursor/commands/*.md"],
+    "humanProseRule": ".cursor/rules/communication.mdc — Human-facing prose"
+  },
+  "operatorAssist": {
+    "betterPrompt": "/better-prompt",
+    "betterPromptVersion": 1,
+    "betterSkill": "/better-skill",
+    "betterSkillVersion": 1,
+    "command": ".cursor/commands/better-prompt.md",
+    "skillCommand": ".cursor/commands/better-skill.md",
+    "delegationRule": ".cursor/rules/delegation.mdc",
+    "tier": ".cursor/docs/l1/operator-assist.json"
+  },
+  "preservation": {
+    "rule": ".cursor/rules/preservation.mdc",
+    "tier": ".cursor/docs/l1/preservation.json"
+  },
+  "codeAuthoring": {
+    "karpathyGuidelines": {
+      "skill": ".cursor/skills/karpathy-guidelines/SKILL.md",
+      "tier": ".cursor/docs/l2/karpathy-guidelines.json",
+      "optIn": true,
+      "embedAlwaysOnRule": "https://github.com/multica-ai/andrej-karpathy-skills/blob/main/.cursor/rules/karpathy-guidelines.mdc",
+      "embedDoc": "https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CURSOR.md"
+    }
+  }
+}

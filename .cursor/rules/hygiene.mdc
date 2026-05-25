@@ -1,0 +1,42 @@
+---
+description: Harness hygiene — overwrite state, retire duplicates, mandatory doc sync
+alwaysApply: true
+---
+
+# Harness hygiene
+
+## Overwrite, do not accumulate
+
+- Tier JSON (`l0.json`, `l1/*.json`, `l2/*.json`), rules, skills: **replace** canonical fields in place.
+- Do not append summaries, duplicate keys, or parallel topic files without a schema change.
+- Exceptions: `log.research[]` and `log.history[]` (rotated via `jq-helpers`); `sessions/*.json` only when the user asks.
+
+## Create = retire
+
+- Before a new `l1/<id>.json` or `skills/<name>/`: search the tree and `INDEX.json`; edit existing or delete obsolete.
+- Banned filenames: `*-v2`, `*-copy`, `*-old`, `*-backup`, `*-new`.
+
+## Delete in the same Action
+
+- Removing a feature → delete the file, remove its `INDEX` anchor, update `.cursor/docs/manifest.json` if the path was listed.
+
+## Mandatory doc sync
+
+- **Any** change under `.cursor/**` → in the **same** Action:
+  1. `log.last` (what / why / paths, including **deleted** paths)
+  2. `current.json`
+  3. Touched tier JSON and `INDEX.json`
+  4. `manifest.json` if hooks, scripts, rules, skills, or commands changed
+- Chat close: `Mode: Action — updated: … deleted: …`
+
+## Shipped core edits
+
+- Changes to always-on `.mdc` rules or versioned slash-command **behavior** need operator entrust per `preservation.mdc`; bump `betterPrompt.version` / `betterSkill.version` in `operator-assist.json` and matching fields in `manifest.json` when coach behavior changes.
+
+## No operator noise
+
+- Do not add root/README/AGENTS sections unless asked.
+- When editing `README.md` or `.cursor/commands/*.md`, use `communication.mdc` human-facing prose; do not add harness runbooks to README.
+- At most one `examples.md` per skill unless asked.
+
+See `documentation.mdc` for research-before-write and Action close checklist.

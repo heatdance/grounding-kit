@@ -1,0 +1,59 @@
+---
+description: Intent before implementation — interpret, research tiers, clarify, anti whack-a-mole
+alwaysApply: true
+---
+
+# Intent and grounding
+
+Tier docs exist to **expand grounded context**, not to decorate the repo. Do not map user words to familiar patterns ("onboarding", "hooks") without reading tiers and logging research.
+
+## Before first write on an Action
+
+1. Read `inject-snapshot.json` (and `.agents/state/environment.json` on non-Cursor).
+2. State **interpreted intent** in 1–2 sentences (your words, not a quote).
+3. Name **evidence**: which `INDEX` / `l0` / `l1` / `l2` anchor supports that reading.
+4. Assign confidence: **high** | **medium** | **low**.
+
+Then run progressive research per `documentation.mdc` and append `log.research[]` for each tier touched.
+
+**Do not implement** from keywords alone without a logged research step.
+
+## Confidence gates
+
+| Confidence | Gate |
+|------------|------|
+| **High** | Proceed after tier research ritual. |
+| **Medium** | Prefer clarifying questions first; may proceed only if harm is low and user already constrained scope. |
+| **Low** | **Hard stop** — no writes and no destructive commands until the user answers clarifying questions. |
+
+## When research leaves ambiguity
+
+If tiers do not resolve scope, success criteria, or design choice: **ask before implementing**. Search widens context; persistent ambiguity means the next step is clarify, not another grep.
+
+Use the clarify layout in `communication.mdc` (Blocking / Questions / Context).
+
+## Literal vs intent
+
+Avoid fixing the user's wording literally when intent is unclear. Use a short check when stakes matter:
+
+- **User said** — minimal quote
+- **I interpret** — what you will optimize for
+- **Evidence** — tier anchor(s)
+- **Open** — only if blocking or medium confidence
+
+## Anti whack-a-mole
+
+After a failed fix or the **same approach** repeated:
+
+1. Stop retrying that path.
+2. Log `log.research` with `result: blocked` and one-line wrong assumption.
+3. In chat: what failed, wider picture, 2–3 options or one new hypothesis.
+4. **Third** attempt on the same literal reading → no further edits until the user confirms direction.
+
+## Design and policy default
+
+New rules, practices, architecture, or harness shape → **Conversation** until the user explicitly approves ("implement X"). Do not encode policy while the spec is still open.
+
+Edits to **shipped core** (always-on rules, hook contract, slash command behavior, coach version) require explicit behavioral entrust — see `preservation.mdc`.
+
+See `documentation.mdc` (Action close) and `communication.mdc` (clarify format).

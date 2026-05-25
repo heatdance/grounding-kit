@@ -1,0 +1,73 @@
+{
+  "v": 1,
+  "id": "operator-assist",
+  "title": "Operator assist",
+  "purpose": "Prompt coaching (/better-prompt) and harness-doc coaching (/better-skill); read-only subagent exploration before parent executes.",
+  "betterPrompt": {
+    "version": 1,
+    "slashCommand": ".cursor/commands/better-prompt.md",
+    "skill": ".cursor/skills/better-prompt/SKILL.md",
+    "golden": ".cursor/docs/l2/better-prompt-golden.json",
+    "turn": "conversation",
+    "noExecution": true,
+    "rubric": ["scope", "done", "environment", "constraints", "verification"],
+    "rubricMaxGaps": 2,
+    "doneQuality": "Each done bullet must cite command, file/path, or exit code; ban vague works/looks-good phrasing",
+    "addendumQuality": "No invented repo paths unless draft or @ attachment names them",
+    "outputSections": [
+      "interpretedIntent",
+      "suggestedDone",
+      "worthAdding",
+      "pasteReadyAddendum",
+      "nextStep"
+    ],
+    "minimalModeWhen": [
+      "Single path and clear verb",
+      "Harness slash command with explicit steps",
+      "Pure question without implementation ask"
+    ],
+    "disclaimer": "Coaching only — your task was not started.",
+    "noAdaptiveCorpus": true
+  },
+  "betterSkill": {
+    "version": 1,
+    "slashCommand": ".cursor/commands/better-skill.md",
+    "skill": ".cursor/skills/better-skill/SKILL.md",
+    "patterns": ".cursor/docs/l2/skill-authoring-patterns.json",
+    "golden": ".cursor/docs/l2/better-skill-golden.json",
+    "turn": "conversation",
+    "noExecution": true,
+    "artifactTypes": ["pipeline", "command", "skill"],
+    "rubrics": ["subagents", "validation_done", "verification_schema", "iterative_subsets"],
+    "rubricMaxImprovements": 2,
+    "noAdaptiveCorpus": true,
+    "disclaimer": "Coaching only — no harness doc was written."
+  },
+  "subagentDelegation": {
+    "rule": ".cursor/rules/delegation.mdc",
+    "delegateWhen": [
+      "Repo-wide or unknown location after inject + INDEX",
+      "Multiple subsystems",
+      "How-does-X before implement",
+      "Medium confidence; read-only scout is low risk"
+    ],
+    "parentOwns": [
+      "Edits and harness changes",
+      "Commits",
+      "verify-harness and tests"
+    ],
+    "cursor": {
+      "tool": "Task",
+      "preferSubagentType": "explore",
+      "maxParallel": 2,
+      "briefIncludes": ["goal", "read-only", "deliverable bullets + paths", "constraints"]
+    },
+    "fallback": "Progressive tier research per documentation.mdc when Task/subagents unavailable"
+  },
+  "related": {
+    "intent": ".cursor/docs/l1/intent.json",
+    "preservation": ".cursor/docs/l1/preservation.json",
+    "communication": ".cursor/rules/communication.mdc",
+    "documentation": ".cursor/rules/documentation.mdc"
+  }
+}

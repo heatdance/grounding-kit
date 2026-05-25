@@ -1,0 +1,38 @@
+---
+description: Explore wide with read-only subagents when scope is broad; parent owns edits and verification
+alwaysApply: true
+---
+
+# Exploration delegation
+
+Parent agent owns **writes**, **harness changes**, **commits**, and **verification** (tests, `verify-harness.ps1` when appropriate, linters). Delegate **read-only recon** when the corpus or location is unclear.
+
+## Delegate exploration when (any)
+
+- Goal spans the repo or target paths are unknown after `inject-snapshot.json` and `INDEX.json`.
+- Multiple areas (e.g. hooks + tier docs + scripts).
+- “How does X work?” before an implementation pass.
+- **Medium** confidence per `intent.mdc` and scouting is low-risk read-only.
+
+## Do not delegate execution
+
+- File edits, doc sync (`log.json`, tiers), or destructive commands.
+- Trivial single-file work with path and expected outcome.
+- Operator used `/better-prompt` (Conversation coaching only).
+- Running verification — parent runs `verify-harness.ps1` (or project tests), and interprets output.
+
+## How to delegate (Cursor Task tool)
+
+- Prefer `subagent_type: explore` (read-only). Brief must include: goal, **read-only**, deliverable (bullets + paths), constraints.
+- At most **2 parallel** explore subagents for independent areas; no subagent chains.
+- Merge findings in the parent **before** the first write. If the summary is lossy, parent `Read`/`Grep` cited paths.
+
+## Non-Cursor / no Task tool
+
+Use progressive tier research per `documentation.mdc` (`INDEX` → one `l1` → one `l2`). Subagents are optional; do not block the turn.
+
+## Relation to intent
+
+Does not override **low** confidence hard stop or Blocking + Questions. Does not replace Action doc close.
+
+See [`.cursor/docs/l1/operator-assist.json`](../docs/l1/operator-assist.json).

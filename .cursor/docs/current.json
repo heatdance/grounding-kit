@@ -1,0 +1,6 @@
+{
+  "resume": "Agent workspace starter — clone-and-go harness for agentic work.",
+  "next": "Run /onboarding once (Cursor) or onboard script (see README). Then use /better-prompt or /better-skill before tasks.",
+  "anchors": ["workspace", "intent"],
+  "backlog": []
+}

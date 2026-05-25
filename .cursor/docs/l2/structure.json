@@ -1,0 +1,46 @@
+{
+  "v": 1,
+  "id": "structure",
+  "title": "Repository structure",
+  "allowlist": [
+    ".cursor/**",
+    ".agents/**"
+  ],
+  "rootFrozen": true,
+  "rootExceptions": ["README.md", "AGENTS.md"],
+  "naming": {
+    "docs": "kebab-case.json",
+    "skills": "directory with SKILL.md",
+    "rules": "*.mdc",
+    "sessions": "YYYY-MM-DD-short-slug.json"
+  },
+  "banned": [
+    "New directories at repo root (harness-*, docs/, temp/)",
+    "Duplicate topic files (topic-v2.json); overwrite in place",
+    "Loading entire l1/ or l2/ trees in one Action",
+    "Shell scripts under .cursor/hooks/",
+    "Duplicate script pairs (foo.sh + foo.ps1 in .cursor/scripts/ root)"
+  ],
+  "hooks": {
+    "path": ".cursor/hooks/",
+    "allowed": "*.ps1",
+    "config": ".cursor/hooks.json",
+    "events": ["sessionStart", "beforeSubmitPrompt", "afterFileEdit"],
+    "note": "No stop hook; doc-close signal is docClose in inject-snapshot.json only."
+  },
+  "scripts": {
+    "canonical": ".cursor/scripts/*.ps1",
+    "unixOnly": ".cursor/scripts/unix/*.sh"
+  },
+  "harness": {
+    "parent": ".cursor/harness/",
+    "stacks": ["playwright", "pytest"]
+  },
+  "manifest": ".cursor/docs/manifest.json",
+  "agentsBridge": {
+    "root": ".agents/",
+    "manifest": ".agents/manifest.yaml",
+    "portableEntry": ".agents/agents.md",
+    "state": ".agents/state/environment.json"
+  }
+}

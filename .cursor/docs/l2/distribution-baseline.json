@@ -1,0 +1,36 @@
+{
+  "v": 1,
+  "id": "distribution-baseline",
+  "title": "Distribution telemetry baselines",
+  "purpose": "Canonical pre-onboarding shapes for log, current, onboarding-status, and environment pair on release tags.",
+  "resetProcedure": [
+    "Clear log.json research and history; set last.when older than 24h with neutral what/why",
+    "Set current.json to clone + /onboarding operator copy; backlog empty",
+    "Set onboarding-status.json ok false with empty checks",
+    "Write identical generic environment.json to .cursor/docs/ and .agents/state/",
+    "Delete .agents/state/adaptation-*.md (regenerated on onboard)",
+    "Run jq-helpers refresh_inject; verify-harness.ps1 exit 0"
+  ],
+  "log": {
+    "research": [],
+    "history": [],
+    "last": {
+      "when": "2020-01-01T00:00:00Z",
+      "what": "Distribution baseline",
+      "why": "Run /onboarding after clone",
+      "paths": []
+    }
+  },
+  "current": {
+    "backlog": [],
+    "anchors": ["workspace", "intent"]
+  },
+  "onboardingStatus": {
+    "ok": false
+  },
+  "environment": {
+    "runtime": "generic",
+    "onboarding": { "ok": false },
+    "detectedAt": null
+  }
+}

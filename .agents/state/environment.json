@@ -1,0 +1,38 @@
+{
+  "v": 1,
+  "runtime": "generic",
+  "label": "Generic agentic tool",
+  "detectedAt": null,
+  "detection": {
+    "method": "baseline",
+    "signals": [],
+    "override": null
+  },
+  "capabilities": {
+    "hooks": false,
+    "injectSnapshot": "manual",
+    "slashCommands": false,
+    "pathGuard": false
+  },
+  "entryPoints": {
+    "primary": ".agents/agents.md",
+    "rules": ["AGENTS.md", ".agents/agents.md", ".cursor/rules/"],
+    "snapshot": ".cursor/docs/inject-snapshot.json",
+    "skills": ".cursor/skills/"
+  },
+  "onboarding": {
+    "ok": false,
+    "statusPath": ".cursor/docs/onboarding-status.json",
+    "operatorSteps": [
+      "Set AGENT_RUNTIME=cursor|opencode|claude-code|generic before onboarding to force a profile.",
+      "Unix: bash .cursor/scripts/unix/onboard.sh | Windows: onboard.ps1",
+      "Unix doc helpers: .cursor/scripts/unix/README.md",
+      "Read .agents/state/environment.json for capability-specific steps.",
+      "Every turn: read inject-snapshot.json; on file changes update log.json per AGENTS.md."
+    ]
+  },
+  "adaptation": {
+    "notesPath": ".agents/state/adaptation-generic.md",
+    "exampleConfig": null
+  }
+}

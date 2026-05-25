@@ -1,0 +1,26 @@
+{
+  "id": "cursor",
+  "label": "Cursor IDE Agent",
+  "detect": {
+    "env": ["CURSOR_TRACE_ID", "CURSOR_SESSION_ID", "CURSOR_AGENT"],
+    "paths": [".cursor/hooks.json"]
+  },
+  "capabilities": {
+    "hooks": true,
+    "injectSnapshot": "hook",
+    "slashCommands": true,
+    "pathGuard": true
+  },
+  "entryPoints": {
+    "primary": "AGENTS.md",
+    "rules": [".cursor/rules/*.mdc"],
+    "snapshot": ".cursor/docs/inject-snapshot.json",
+    "skills": ".cursor/skills/"
+  },
+  "operatorSteps": [
+    "Trust workspace hooks when prompted.",
+    "Run onboard.ps1 (Windows) if not done.",
+    "Reload Cursor after onboarding.",
+    "Start a new Agent chat; read inject-snapshot.json each turn."
+  ]
+}

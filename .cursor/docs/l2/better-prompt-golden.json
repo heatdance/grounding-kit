@@ -1,0 +1,30 @@
+{
+  "v": 1,
+  "id": "better-prompt-golden",
+  "title": "Better-prompt regression pack",
+  "purpose": "Maintainer checks: coach contract shape and mode expectations. Agents do not load this during /better-prompt.",
+  "expectCoachVersion": 1,
+  "cases": [
+    {
+      "id": "vague-app",
+      "draft": "fix the app",
+      "expectMode": "full",
+      "requiredSections": ["interpretedIntent", "suggestedDone", "worthAdding", "pasteReadyAddendum", "nextStep"],
+      "forbiddenPhrases": ["works correctly", "looks good", "properly fixed"]
+    },
+    {
+      "id": "tight-verify",
+      "draft": "run verify-harness.ps1 and fix any manifest_drift FAIL lines; re-run until exit 0",
+      "expectMode": "minimal",
+      "requiredSections": ["interpretedIntent", "suggestedDone"],
+      "forbiddenPhrases": []
+    },
+    {
+      "id": "vague-onboarding",
+      "draft": "fix onboarding",
+      "expectMode": "full",
+      "requiredSections": ["interpretedIntent", "suggestedDone", "worthAdding"],
+      "forbiddenPhrases": ["works correctly", "looks good"]
+    }
+  ]
+}

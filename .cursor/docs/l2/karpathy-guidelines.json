@@ -1,0 +1,24 @@
+{
+  "v": 1,
+  "id": "karpathy-guidelines",
+  "title": "Karpathy coding guidelines (opt-in)",
+  "purpose": "Optional skill for application/test code; not shipped core behavior.",
+  "skill": ".cursor/skills/karpathy-guidelines/SKILL.md",
+  "upstream": {
+    "repo": "https://github.com/multica-ai/andrej-karpathy-skills",
+    "skillPath": "skills/karpathy-guidelines/SKILL.md",
+    "cursorRule": "https://github.com/multica-ai/andrej-karpathy-skills/blob/main/.cursor/rules/karpathy-guidelines.mdc",
+    "license": "MIT"
+  },
+  "alwaysApply": false,
+  "useWhen": [
+    "application code",
+    "test code",
+    "harness stack under .cursor/harness/"
+  ],
+  "notWhen": [
+    "harness tier JSON only",
+    "rules/commands coaching",
+    "preservation-blocked core edits"
+  ]
+}

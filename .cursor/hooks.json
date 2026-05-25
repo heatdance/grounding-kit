@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/inject-context.ps1"
+      }
+    ],
+    "beforeSubmitPrompt": [
+      {
+        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/inject-context.ps1",
+        "matcher": "UserPromptSubmit"
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/guard-paths.ps1"
+      }
+    ]
+  }
+}

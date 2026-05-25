@@ -1,0 +1,28 @@
+{
+  "v": 1,
+  "id": "runtimes",
+  "title": "Multi-runtime agent bridge",
+  "purpose": "Let onboarding adapt the repo for Cursor, OpenCode, Claude Code, or generic agentic tools via .agents/.",
+  "bridge": {
+    "manifest": ".agents/manifest.yaml",
+    "portableEntry": ".agents/agents.md",
+    "state": ".agents/state/environment.json",
+    "profiles": ".agents/runtimes/"
+  },
+  "detection": {
+    "overrideEnv": "AGENT_RUNTIME",
+    "scriptWindows": ".cursor/scripts/detect-environment.ps1",
+    "scriptAdaptWindows": ".cursor/scripts/adapt-environment.ps1",
+    "scriptAdaptUnix": ".cursor/scripts/unix/adapt-environment.sh",
+    "unixReadme": ".cursor/scripts/unix/README.md"
+  },
+  "cursor": {
+    "hooks": true,
+    "inject": "hook via .cursor/hooks.json"
+  },
+  "nonCursor": {
+    "hooks": false,
+    "inject": "manual read of inject-snapshot.json; refresh via jq-helpers refresh_inject",
+    "opencodeExample": ".agents/adaptation/opencode.json.example"
+  }
+}

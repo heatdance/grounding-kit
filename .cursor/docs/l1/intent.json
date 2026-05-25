@@ -1,0 +1,52 @@
+{
+  "v": 1,
+  "id": "intent",
+  "title": "Intent before implementation",
+  "purpose": "Ground agents in interpreted user intent and tier evidence before writes; clarify when ambiguous; avoid literal whack-a-mole fixes.",
+  "rules": {
+    "alwaysOn": ".cursor/rules/intent.mdc",
+    "clarifyLayout": ".cursor/rules/communication.mdc",
+    "actionFlow": ".cursor/rules/documentation.mdc",
+    "humanFacing": "README and command operator intros only when the user asked; do not rewrite README on agent-only harness tasks"
+  },
+  "actionOpen": [
+    "Read inject-snapshot.json (and environment.json if non-Cursor).",
+    "If docClose.pending is true, run jq-helpers set_last (and append_research if .cursor/ was touched) before claiming done.",
+    "State interpreted intent, INDEX/l0 evidence, confidence: high | medium | low.",
+    "Low confidence: Blocking + Questions only; no writes until user answers.",
+    "Progressive research: INDEX then at most one l1 and one l2; append log.research[] each step.",
+    "If tiers leave ambiguity: clarify (Blocking / Questions / Context); do not guess.",
+    "After edits: log.last, current.json, tiers, manifest if harness changed."
+  ],
+  "confidence": {
+    "high": "Proceed after tier research ritual.",
+    "medium": "Prefer clarifying questions; proceed only if harm is low and user constrained scope (e.g. explicit 'implement the plan').",
+    "low": "Hard stop: no writes or destructive commands until user answers."
+  },
+  "mediumExamples": {
+    "proceed": [
+      "User attached approved plan and said implement it.",
+      "User gave exact file list and success criteria.",
+      "Trivial typo fix with path and expected string provided."
+    ],
+    "mustAsk": [
+      "Multiple valid architectures or scopes.",
+      "Success criteria undefined for a new feature.",
+      "User keyword matches a familiar pattern but INDEX anchor unclear."
+    ]
+  },
+  "clarifyFormat": {
+    "blocking": "What prevents implementation now.",
+    "questions": "Numbered asks; as many as needed.",
+    "context": "Optional tradeoffs; not mixed into Questions."
+  },
+  "whackAMole": {
+    "afterFailure": "Stop same path; log research result blocked with wrong assumption.",
+    "thirdLiteralAttempt": "No further edits until user confirms direction."
+  },
+  "audit": {
+    "researchTrail": "jq '.research[-10:]' .cursor/docs/log.json",
+    "lastAction": "jq '.last' .cursor/docs/log.json",
+    "skill": ".cursor/skills/agent-intent/"
+  }
+}

@@ -1,0 +1,50 @@
+---
+description: Turn classification, inject snapshot, research-before-Action, doc close
+alwaysApply: true
+---
+
+# Documentation harness
+
+## Every turn (before classifying)
+
+1. Read `.cursor/docs/inject-snapshot.json` (hook-refreshed on Cursor each prompt; **manual read** on other runtimes — see `.agents/state/environment.json`).
+2. If `docClose.pending` is true, treat doc sync as due (run `set_last` / `append_research` per hint). **No** `stop` hook or `followup_message` — signal is inject-only.
+3. Classify **Conversation** vs **Action**.
+
+## Conversation
+
+- Chat only; no writes under `.cursor/docs/` tier files, `log.json`, or `current.json`.
+- Do not append `log.research` or change `log.last.paths` for discussion-only turns.
+
+## Action
+
+Any durable change under the allowlist (see `structure.mdc`).
+
+### Before first write tool
+
+0. Intent gate per `intent.mdc` (interpreted intent, evidence, confidence; **low** = no writes until user replies).
+   - **Human-facing** (`README.md`, operator intro in `.cursor/commands/*.md`): `communication.mdc` human-facing prose (purpose before mechanism, 60-second test).
+1. Progressive research: L0 + `INDEX.json` → at most one `l1/*.json` → at most one `l2/*.json`.
+2. Log each step to `log.research[]` (Windows: `.cursor/scripts/jq-helpers.ps1 append_research`; Unix: `.cursor/scripts/unix/jq-helpers.sh append_research`).
+3. Do not load entire `l1/` or `l2/` directories.
+4. If research ends ambiguous → clarify (`communication.mdc` Blocking / Questions / Context); do not guess and implement.
+
+### After work (mandatory)
+
+Required for **any** `.cursor/` file change (not only semantic tier changes):
+
+1. Update `log.json` — `last` with what / when / why / mode / paths (include **deleted** paths); run `jq-helpers.ps1 set_last` then `rotate_log` (or Unix `unix/jq-helpers.sh`).
+2. Overwrite `current.json` (resume, next, anchors; keep small).
+3. Patch `INDEX.json` and every touched tier JSON.
+4. Update `.cursor/docs/manifest.json` if hooks, scripts, rules, skills, or commands changed.
+5. Run `jq empty` on edited JSON files.
+6. Report in chat: `Mode: Action — updated: … deleted: …`
+
+## Overrides
+
+| Phrase | Effect |
+|--------|--------|
+| `more detail` | May load one extra L1 or L2 file |
+| `formal report` | Structured output allowed in chat per communication.mdc Deep tier |
+
+See [AGENTS.md](../../AGENTS.md) and skill `.cursor/skills/doc-maintenance/`.

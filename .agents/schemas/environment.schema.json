@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-workspace-starter/environment",
+  "title": "Workspace environment profile",
+  "type": "object",
+  "required": ["v", "runtime", "detectedAt", "capabilities", "entryPoints", "onboarding"],
+  "properties": {
+    "v": { "type": "integer", "const": 1 },
+    "runtime": {
+      "type": "string",
+      "enum": ["cursor", "opencode", "claude-code", "generic"]
+    },
+    "detectedAt": { "type": "string", "format": "date-time" },
+    "detection": {
+      "type": "object",
+      "properties": {
+        "method": { "type": "string" },
+        "signals": { "type": "array", "items": { "type": "string" } },
+        "override": { "type": "string" }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "required": ["hooks", "injectSnapshot", "slashCommands"],
+      "properties": {
+        "hooks": { "type": "boolean" },
+        "injectSnapshot": { "type": "string", "enum": ["hook", "manual"] },
+        "slashCommands": { "type": "boolean" },
+        "pathGuard": { "type": "boolean" }
+      }
+    },
+    "entryPoints": {
+      "type": "object",
+      "properties": {
+        "primary": { "type": "string" },
+        "rules": { "type": "array", "items": { "type": "string" } },
+        "snapshot": { "type": "string" },
+        "skills": { "type": "string" }
+      }
+    },
+    "onboarding": {
+      "type": "object",
+      "properties": {
+        "ok": { "type": "boolean" },
+        "statusPath": { "type": "string" },
+        "operatorSteps": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "adaptation": {
+      "type": "object",
+      "properties": {
+        "notesPath": { "type": "string" },
+        "exampleConfig": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": true
+}

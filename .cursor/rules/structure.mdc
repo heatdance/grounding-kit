@@ -1,0 +1,39 @@
+---
+description: Repository allowlist — .cursor only, naming, harness parent
+alwaysApply: true
+---
+
+# Repository structure
+
+## Writable paths
+
+Agents may create or edit only:
+
+- `.cursor/**`
+- `.agents/**` (portable bridge: manifest, runtimes, `state/`, schemas — not a second harness)
+- `README.md` or `AGENTS.md` at repo root **only when the user explicitly requests it**
+
+Never create `docs/`, `harness-*`, `temp/`, `scripts/`, or other new top-level directories or files.
+
+## Harness
+
+All harness templates live under `.cursor/harness/<stack>/` (e.g. `playwright`, `pytest`). One parent; no stack folders at repo root.
+
+## Documentation JSON
+
+- Path: `.cursor/docs/l1/`, `l2/`, `sessions/`
+- Filenames: `kebab-case.json`
+- One anchor id → one file; **overwrite in place** — do not add `topic-v2.json` or parallel copies.
+
+## Skills and rules
+
+- Rules: `.cursor/rules/<name>.mdc`
+- Skills: `.cursor/skills/<skill-name>/SKILL.md`
+
+## Hooks and scripts (canonical surface)
+
+- Hooks: `.cursor/hooks/*.ps1` only — **never** create `.sh` under `.cursor/hooks/`.
+- Scripts: `.cursor/scripts/*.ps1` (Windows/canonical); Unix-only under `.cursor/scripts/unix/*.sh`.
+- **No** duplicate pairs (`foo.sh` + `foo.ps1` in the same `scripts/` folder).
+
+See [AGENTS.md](../../AGENTS.md), `hygiene.mdc`, and `.cursor/docs/l2/structure.json` for full schema.

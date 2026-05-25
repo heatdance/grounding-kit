@@ -1,0 +1,12 @@
+{
+  "v": 1,
+  "last": {
+    "when": "2020-01-01T00:00:00Z",
+    "what": "Distribution baseline",
+    "why": "Run /onboarding after clone",
+    "mode": "action",
+    "paths": []
+  },
+  "research": [],
+  "history": []
+}

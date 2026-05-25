@@ -1,0 +1,67 @@
+{
+  "v": 1,
+  "loadPolicy": "Hooks inject l0 excerpt + log digest + current.json. Agents must not load all l1/l2 files. Resolve anchors via INDEX.json; dive one tier at a time; log each step to log.research[].",
+  "tiers": {
+    "L0": ".cursor/docs/l0.json",
+    "L1": ".cursor/docs/l1/",
+    "L2": ".cursor/docs/l2/",
+    "sessions": ".cursor/docs/sessions/"
+  },
+  "anchors": [
+    {
+      "id": "workspace",
+      "tier": "L1",
+      "summary": "What this agent workspace starter is and how agents use it"
+    },
+    {
+      "id": "structure",
+      "tier": "L2",
+      "summary": "Allowlist paths, naming, harness layout under .cursor/"
+    },
+    {
+      "id": "runtimes",
+      "tier": "L1",
+      "summary": "Multi-runtime .agents bridge and environment-aware onboarding"
+    },
+    {
+      "id": "intent",
+      "tier": "L1",
+      "summary": "Interpret intent, confidence gates, clarify before implement, anti whack-a-mole"
+    },
+    {
+      "id": "operator-assist",
+      "tier": "L1",
+      "summary": "/better-prompt and /better-skill coaches; explore-wide subagent delegation"
+    },
+    {
+      "id": "preservation",
+      "tier": "L1",
+      "summary": "Shipped core immutable unless operator entrusts harness behavior change"
+    },
+    {
+      "id": "better-prompt-golden",
+      "tier": "L2",
+      "summary": "Maintainer golden cases for better-prompt coach"
+    },
+    {
+      "id": "skill-authoring-patterns",
+      "tier": "L2",
+      "summary": "Static patterns for better-skill rubrics"
+    },
+    {
+      "id": "better-skill-golden",
+      "tier": "L2",
+      "summary": "Maintainer golden cases for better-skill coach"
+    },
+    {
+      "id": "karpathy-guidelines",
+      "tier": "L2",
+      "summary": "Opt-in Karpathy guidelines for application/test code"
+    },
+    {
+      "id": "distribution-baseline",
+      "tier": "L2",
+      "summary": "Release telemetry baselines and maintainer reset procedure"
+    }
+  ]
+}

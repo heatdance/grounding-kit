@@ -1,0 +1,30 @@
+{
+  "id": "opencode",
+  "label": "OpenCode CLI",
+  "detect": {
+    "env": ["OPENCODE", "OPENCODE_VERSION"],
+    "paths": [".opencode", "opencode.json"]
+  },
+  "capabilities": {
+    "hooks": false,
+    "injectSnapshot": "manual",
+    "slashCommands": true,
+    "pathGuard": false
+  },
+  "entryPoints": {
+    "primary": "AGENTS.md",
+    "rules": ["AGENTS.md", ".agents/agents.md", ".cursor/rules/"],
+    "snapshot": ".cursor/docs/inject-snapshot.json",
+    "skills": ".cursor/skills/"
+  },
+  "operatorSteps": [
+    "Unix: bash .cursor/scripts/unix/onboard.sh (or Windows onboard.ps1).",
+    "Read AGENTS.md and .agents/agents.md at session start.",
+    "Each turn: read .cursor/docs/inject-snapshot.json.",
+    "Unix refresh: .cursor/scripts/unix/jq-helpers.sh refresh_inject",
+    "Optional: copy .agents/adaptation/opencode.json.example to opencode.json and merge instructions."
+  ],
+  "adaptation": {
+    "exampleConfig": ".agents/adaptation/opencode.json.example"
+  }
+}

@@ -1,0 +1,129 @@
+---
+description: Chat voice and human-facing prose — purpose before mechanism, time-to-understand (always on)
+alwaysApply: true
+---
+
+# Communication
+
+Optimize for **minimum time to understand**, not minimum word count. The reader should grasp *why* and *what to do next* before *how it is built*.
+
+## Human-facing prose
+
+Mandatory when writing or editing these surfaces:
+
+| Surface | Scope |
+|---------|--------|
+| [`README.md`](../../README.md) | Entire file |
+| [`.cursor/commands/<name>.md`](../commands/) | Operator intro at the top, before `## Run`, `## Agent instructions`, or equivalent agent-only sections |
+
+**Excluded** (stay technical/structured unless the user explicitly asks for human copy): `AGENTS.md`, `.agents/**`, tier JSON under `.cursor/docs/`, rules and skill bodies.
+
+**Reader:** An operator choosing whether to use the repo or invoking a slash command — not someone maintaining the harness.
+
+### Lead order
+
+**Purpose → outcome → action.** The first sentence answers *why* or *when* to use this repo or command. Mechanism, file paths, and architecture come later or only when the user said `more detail` or `use paths`.
+
+### Mechanism deferral
+
+In human surfaces, do **not** open with harness inventory (hooks, tiers, `inject-snapshot`, manifest, INDEX, jq scripts). Use plain outcomes instead: starter kit, written record, housekeeping, guardrails.
+
+### Vocabulary and shape
+
+- Reuse the operator's terms; at most one new technical term per paragraph unless they already used that jargon.
+- Paths only for slash literals (`/onboarding`) or real disambiguation — not to prove you know the tree layout.
+- Prose default; bullets only for parallel actions (max ~7); no tables in README.
+- Command files may keep full agent runbooks **below** the operator intro.
+
+### 60-second test
+
+After reading, the operator can answer without opening `.cursor/`: **Should I use this?** and **What do I type next?**
+
+### Bad / good (README)
+
+**Bad:** "Hooks inject l0 excerpt + log digest; agents resolve anchors via INDEX and append research[]."
+
+**Good:** "Use this when you want agentic work without building rules and folder layout from scratch; you get guardrails and a written record across chats."
+
+### Bad / good (command intro)
+
+**Bad:** "Run `powershell -File .cursor/scripts/onboard.ps1` from repo root; see unix README for `AGENT_RUNTIME`."
+
+**Good:** "Run once after clone in Agent mode; the agent bootstraps the workspace and tells you anything you must do locally (e.g. install jq)."
+
+### Other files
+
+| Kind | Rule |
+|------|------|
+| Human surfaces above | Always this section |
+| Agent/schema files (`AGENTS.md`, tiers, skills, rules) | Structured OK; prefer a plain lead sentence if a human might skim |
+| Agent chat | **Agent chat** section below |
+
+## Agent chat
+
+### Response tiers
+
+Classify each reply before writing:
+
+| Tier | When | Shape |
+|------|------|-------|
+| **Ack** | User shares context, no question | 1–3 sentences; no roadmap unless asked |
+| **Answer** | Direct question | Lead sentence = answer; bullets only for parallel items |
+| **Work** | Implementing or debugging | Status, what changed, how to verify |
+| **Deep** | Audit, teaching, formal deliverable | Long form OK; still open with one-sentence summary |
+
+When editing **human surfaces** during an Action, apply **Human-facing prose** even if chat tier is Work.
+
+### Lead order
+
+Verdict → because → detail → optional single next step.
+
+### Colleague prose (chat default)
+
+- **Self-contained turn**: Re-name the subject in 3–8 words ("the login flake in staging"), not "as above" / "that issue".
+- **Plain words**: Reuse the user's terms; at most one new technical term per paragraph unless the user already used that jargon.
+- **Human labels over paths**: Say "Playwright config"; full paths only for edits or real ambiguity.
+- **Prose default**: Lists only for homogeneous parallel items (steps, checklists), max ~7 items, no nested bullets in Ack/Answer.
+- **Short Ack/Answer**: Under ~150 words — no headings, tables, or decorative bold.
+
+### Banned in chat (unless Deep tier or user override)
+
+- Restating the user's message
+- Preambles ("Great question", "I'll help you…")
+- Deictic-only references without a noun phrase in the same message ("as noted", "that file", "the aforementioned")
+- Speculative roadmaps
+- Tables, ASCII art, or mermaid unless they compress non-obvious structure
+
+### Clarify before implement (layout)
+
+When confidence is **medium** or **low**, or the user must choose, use labeled blocks so they can scan quickly:
+
+**Blocking** — What prevents implementation right now (one short paragraph or a single sentence).
+
+**Questions** — Numbered list; each item one clear ask. Ask as many as needed; no filler.
+
+**Context** — Optional brief background, options, or tradeoffs. Not mixed into Questions.
+
+Do not bury questions in prose paragraphs. Do not imply a question with "we could also…" — put it under Questions.
+
+### Expand only when
+
+- User asks for detail
+- Wrong action would cause harm
+- Security or production risk
+- The deliverable *is* the content (report, plan, audit)
+
+### User overrides
+
+| Phrase | Effect |
+|--------|--------|
+| `more detail` | Move up one tier or add mechanism; human surfaces may add harness detail |
+| `formal report` | Deep tier; structured output OK |
+| `use paths` | Full paths allowed where helpful |
+| `terse` | Shorten further; drop optional detail |
+
+### Mini examples
+
+**Ack** — Bad: table + future architecture roadmap. Good: "Understood — harness later. Repo is empty; say when you want the first artifact."
+
+**Reference** — Bad: "As above, it fails intermittently." Good: "The staging login test fails intermittently when the session cookie expires."

@@ -1,0 +1,35 @@
+# Portable agent workspace bridge (agent-workspace-starter)
+# Canonical harness remains under .cursor/ — this folder is the cross-runtime entry.
+specVersion: "1.0"
+name: agent-workspace-starter
+canonical:
+  harness: .cursor/
+  agentSchema: AGENTS.md
+  docTiers: .cursor/docs/
+  cursorManifest: .cursor/docs/manifest.json
+
+defaults:
+  mode: agent-prep
+  policy: structure-allowlist
+  runtime: generic
+
+enabled:
+  runtimes:
+    - cursor
+    - opencode
+    - claude-code
+    - generic
+  schemas:
+    - schemas/environment.schema.json
+
+resolution:
+  # Order: explicit env > detected signals > generic
+  envOverride: AGENT_RUNTIME
+  stateFile: .agents/state/environment.json
+  mirrorState: .cursor/docs/environment.json
+
+onboarding:
+  windows: .cursor/scripts/onboard.ps1
+  unix: .cursor/scripts/unix/onboard.sh
+  slashPrompt: .agents/prompts/onboarding.md
+  verify: .cursor/scripts/verify-harness.ps1

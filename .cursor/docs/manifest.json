@@ -1,0 +1,42 @@
+{
+  "v": 1,
+  "hooks": ["inject-context.ps1", "guard-paths.ps1"],
+  "scripts": ["onboard.ps1", "digest-lib.ps1", "Get-DocCloseStatus.ps1", "jq-helpers.ps1", "query-log.ps1", "verify-harness.ps1", "detect-environment.ps1", "adapt-environment.ps1", "action-open.ps1", "Update-SessionState.ps1"],
+  "scriptsUnix": [
+    "unix/onboard.sh",
+    "unix/digest-lib.sh",
+    "unix/doc-close-status.sh",
+    "unix/jq-helpers.sh",
+    "unix/detect-environment.sh",
+    "unix/adapt-environment.sh",
+    "unix/verify-harness.sh",
+    "unix/action-open.sh",
+    "unix/README.md"
+  ],
+  "rules": ["communication.mdc", "structure.mdc", "documentation.mdc", "hygiene.mdc", "intent.mdc", "delegation.mdc", "preservation.mdc"],
+  "skills": ["agent-communication", "doc-maintenance", "agent-intent", "better-prompt", "better-skill", "karpathy-guidelines"],
+  "betterPromptVersion": 1,
+  "betterSkillVersion": 1,
+  "commands": ["onboarding.md", "better-prompt.md", "better-skill.md"],
+  "docsCore": [
+    "INDEX.json",
+    "l0.json",
+    "log.json",
+    "current.json",
+    "inject-snapshot.json",
+    "manifest.json",
+    "onboarding-status.json",
+    "environment.json",
+    "session-state.json"
+  ],
+  "docsTiers": {
+    "l1": ["workspace.json", "runtimes.json", "intent.json", "operator-assist.json", "preservation.json"],
+    "l2": ["structure.json", "better-prompt-golden.json", "skill-authoring-patterns.json", "better-skill-golden.json", "karpathy-guidelines.json", "distribution-baseline.json"]
+  },
+  "agentsBridge": {
+    "manifest": ".agents/manifest.yaml",
+    "entry": ".agents/agents.md",
+    "state": ".agents/state/environment.json",
+    "runtimes": ["cursor", "opencode", "claude-code", "generic"]
+  }
+}

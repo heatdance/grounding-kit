@@ -1,0 +1,33 @@
+{
+  "v": 1,
+  "id": "better-skill-golden",
+  "title": "Better-skill regression pack",
+  "purpose": "Maintainer checks: coach contract and artifact modes. Agents do not load this during /better-skill.",
+  "expectCoachVersion": 1,
+  "cases": [
+    {
+      "id": "pipeline-stub",
+      "artifactType": "pipeline",
+      "draft": "Generate coverage for the epic and write the json file.",
+      "expectMode": "full",
+      "requiredSections": ["artifact", "scorecard", "verdict"],
+      "forbiddenPhrases": ["works correctly", "comprehensive", "robust"]
+    },
+    {
+      "id": "tight-command",
+      "artifactType": "command",
+      "draft": "Run verify-harness.ps1 from repo root; fix FAIL lines; re-run until exit 0.",
+      "expectMode": "minimal",
+      "requiredSections": ["artifact", "verdict"],
+      "forbiddenPhrases": []
+    },
+    {
+      "id": "pipeline-good",
+      "artifactType": "pipeline",
+      "draft": "Phases 0-N, prerequisites, MUST NOT one-shot, delete temp/, verifier exit 0.",
+      "expectMode": "good_to_go",
+      "requiredSections": ["artifact", "scorecard", "verdict"],
+      "forbiddenPhrases": ["Needs work"]
+    }
+  ]
+}

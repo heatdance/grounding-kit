@@ -1,0 +1,41 @@
+---
+description: Shipped harness core is immutable unless operator explicitly entrusts behavior change
+alwaysApply: true
+---
+
+# Harness preservation
+
+Distributed clones must stay **predictable** without an owner watching every chat. Treat **shipped core** as behavior-frozen unless the operator clearly authorizes a harness behavior change.
+
+## Shipped core (do not edit casually)
+
+- Always-on rules: `communication.mdc`, `structure.mdc`, `documentation.mdc`, `hygiene.mdc`, `intent.mdc`, `delegation.mdc`, `preservation.mdc`
+- Hook contract: `.cursor/hooks.json` events; PowerShell-only `.cursor/hooks/*.ps1`
+- Inject protocol: read `inject-snapshot.json`, `docClose`, progressive L0→L1→L2 load in `l0.json`
+- Canonical lists in `.cursor/docs/manifest.json`
+- Slash **behavior** for: `onboarding`, `better-prompt`, `better-skill` (`better-prompt` / `better-skill` are Conversation coaches only; no execution)
+- `operator-assist.json` → `betterPrompt.version` and `betterSkill.version` coach contracts (bump only with intentional release)
+
+## Allowed without behavioral entrust
+
+- Task work under allowlist (e.g. harness templates, user stack under `.cursor/harness/`)
+- Tier content outside shipped core when the task requires it
+- `README.md` / `AGENTS.md` when the operator explicitly requests
+- Bugfixes that **restore** documented behavior (typo, broken path, `verify-harness` failure)
+- Doc sync (`log.json`, `current.json`, INDEX) after a legitimate Action
+
+## Requires explicit behavioral entrust
+
+Phrasing examples: “change harness behavior”, “modify always-on rule”, “weaken intent gate”, “add auto-learning to better-prompt”, “add auto-learning to better-skill”, “remove preservation check”, “implement preservation exception”.
+
+If the operator says vague “improve the agent” or “make coaching smarter”:
+
+- Do **not** edit shipped core, add corpora, or weaken gates by default.
+- Prefer Conversation coaching, task-scoped work, or **one** clarifying question: shipped behavior change vs one-off task.
+
+## Relation to other rules
+
+- `intent.mdc` — confidence and clarify; preservation is **scope** for what files define product behavior.
+- `hygiene.mdc` — always-on rule edits need entrust; bump `betterPrompt.version` when coach behavior changes.
+
+Tier: [`.cursor/docs/l1/preservation.json`](../docs/l1/preservation.json).

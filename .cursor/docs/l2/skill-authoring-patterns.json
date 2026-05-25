@@ -1,0 +1,24 @@
+{
+  "v": 1,
+  "id": "skill-authoring-patterns",
+  "title": "Skill authoring patterns",
+  "purpose": "Static cues for /better-skill coach only; not injected by hooks. Domain-neutral; no adaptive corpus.",
+  "rubrics": {
+    "subagents": {
+      "pattern": "Orchestrator MUST NOT one-shot heavy slices; one Task/subprocess per slice with written brief; merge to durable artifact; cap parallel passes.",
+      "antiPattern": "Single chat completion claims ledger + emit + verify done without subprocess boundaries."
+    },
+    "validation_done": {
+      "pattern": "Each phase or run ends with observable done: verifier exit 0, validation_log step, or explicit STOP with operator recovery.",
+      "antiPattern": "Looks complete or should work with no command, exit code, or STOP table."
+    },
+    "verification_schema": {
+      "pattern": "Durable JSON: schema_version, contract doc, forbidden inputs, proceed means fresh run not merge failed attempt.",
+      "antiPattern": "Retry same path without logging blocked assumption; durable paths containing /temp/."
+    },
+    "iterative_subsets": {
+      "pattern": "Large work via phased gates, map_only or per-bundle temp files; delete temp/ before complete.",
+      "antiPattern": "Materialize full artifact and markdown in one turn without subset boundaries."
+    }
+  }
+}

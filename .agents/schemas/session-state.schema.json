@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-workspace-starter/session-state",
+  "title": "Per-session agent state (overwrite, not append)",
+  "type": "object",
+  "required": ["v", "attempts", "editsThisSession"],
+  "properties": {
+    "v": { "type": "integer", "const": 1 },
+    "lastConfidence": { "type": ["string", "null"], "enum": ["high", "medium", "low", null] },
+    "lastIntentSummary": { "type": ["string", "null"] },
+    "attempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["when", "hypothesis"],
+        "properties": {
+          "when": { "type": "string" },
+          "hypothesis": { "type": "string" },
+          "path": { "type": "string" }
+        }
+      }
+    },
+    "editsThisSession": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

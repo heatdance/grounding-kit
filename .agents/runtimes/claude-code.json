@@ -1,0 +1,25 @@
+{
+  "id": "claude-code",
+  "label": "Claude Code",
+  "detect": {
+    "env": ["CLAUDE_CODE", "CLAUDE_CODE_SSE_PORT"],
+    "paths": ["CLAUDE.md"]
+  },
+  "capabilities": {
+    "hooks": false,
+    "injectSnapshot": "manual",
+    "slashCommands": false,
+    "pathGuard": false
+  },
+  "entryPoints": {
+    "primary": "AGENTS.md",
+    "rules": ["AGENTS.md", "CLAUDE.md", ".agents/agents.md"],
+    "snapshot": ".cursor/docs/inject-snapshot.json",
+    "skills": ".cursor/skills/"
+  },
+  "operatorSteps": [
+    "Run onboarding script from repo root.",
+    "Follow AGENTS.md; read inject-snapshot.json at the start of each task.",
+    "Use .cursor/scripts/jq-helpers for log updates on Action close."
+  ]
+}
